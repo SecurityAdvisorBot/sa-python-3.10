@@ -7,22 +7,7 @@ env:
   IMAGE_NAME: sa-python-3.10
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Run tests
-        run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml run sut
-          else
-            docker build . --file Dockerfile
-          fi
   dockerhub:
-    needs: test
     name: Build & Push to Dockerhub
     runs-on: ubuntu-latest
     steps:
@@ -58,7 +43,6 @@ jobs:
           docker push $IMAGE_ID --all-tags
 
   github:
-    needs: test
     name: Build and push to GitHub
     runs-on: ubuntu-latest
     steps:
