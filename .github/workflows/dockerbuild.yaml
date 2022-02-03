@@ -70,4 +70,5 @@ jobs:
           echo VERSION=$VERSION
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION-$GITHUB_RUN_NUMBER-$NOW-$SHORT_SHA
+          docker tag $IMAGE_NAME $IMAGE_ID:latest
           docker push $IMAGE_ID --all-tags
